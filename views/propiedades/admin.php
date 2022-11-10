@@ -3,15 +3,15 @@
         
     <?php 
         if($resultado){
-            $mensaje = mostrarNotificacion( intval( $resultado) );
+            $mensaje = mostrarNotificacion( intval($resultado) );
             if($mensaje) { ?>
                 <p class="alerta exito"><?php echo s($mensaje); ?></p>
             <?php }
         }
     ?>
 
-    <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
-    <a href="/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
+    <a href="/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+    <a href="/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo (a) Vendedor</a>
 
     <h2>Propiedades</h2>
     <table class="propiedades">
