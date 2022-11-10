@@ -25,10 +25,10 @@ class PropiedadController  {
 
     public static function crear(Router $router) {
 
-        $errores = Propiedad::getErrores();
         $propiedad = new Propiedad;
         $vendedores = Vendedor::all();
-
+        
+        $errores = Propiedad::getErrores();
         // Ejecutar el código después de que el usuario envia el formulario
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
