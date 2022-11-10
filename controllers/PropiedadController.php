@@ -8,7 +8,6 @@ use Model\Vendedor;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class PropiedadController  {
-    
     public static function index(Router $router) {
         $propiedades = Propiedad::all();
         $vendedores = Vendedor::all();
@@ -16,7 +15,7 @@ class PropiedadController  {
         // Muestra mensaje condicional
         $resultado = $_GET['resultado'] ?? null;
 
-        $router->render('propiedades/index', [
+        $router->render('propiedades/admin', [
             'propiedades' => $propiedades,
             'vendedores' => $vendedores,
             'resultado' => $resultado
@@ -72,7 +71,7 @@ class PropiedadController  {
 
     public static function actualizar(Router $router) {
 
-        $id = validarORedireccionar('/propiedades');
+        $id = validarORedireccionar('/admin');
 
         // Obtener los datos de la propiedad
         $propiedad = Propiedad::find($id);
@@ -141,7 +140,7 @@ class PropiedadController  {
     
                 // encontrar y eliminar la propiedad
                 $propiedad = Propiedad::find($id);
-                $resultado = $propiedad->eliminar();
+                $propiedad->eliminar();
 
                 // Redireccionar
                 if($resultado) {
