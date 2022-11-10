@@ -1,19 +1,16 @@
 {
-    "name": "bienesraicesmvc",
-    "description": "Creando un proyecto",
+    "name": "elisacarballo/up-task_mvc",
+    "description": "Proyecto UpTask MVC, PHP 8, SASS",
     "type": "project",
-    "authors": [
-        {
-            "name": "Elsa Elisa Carballo Sanchez",
-            "email": "elisa.carballo79@gmail.com"
-        }
-    ],
-    "require": {
-        "intervention/image": "^2.5"
-    },
     "autoload": {
         "psr-4": {
-            "Model\\" : "./models"
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models", 
+            "Classes\\" : "./classes"
         }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
     }
 }

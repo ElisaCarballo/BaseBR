@@ -6,44 +6,41 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit248b229801596ea35a645d3931c13c39
 {
-    public static $files = array (
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'Psr\\Http\\Message\\' => 17,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'I' => 
+        'M' => 
         array (
-            'Intervention\\Image\\' => 19,
+            'Model\\' => 6,
+            'MVC\\' => 4,
         ),
-        'G' => 
+        'C' => 
         array (
-            'GuzzleHttp\\Psr7\\' => 16,
-        ),
-        'A' => 
-        array (
-            'App\\' => 4,
+            'Controllers\\' => 12,
+            'Classes\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Psr\\Http\\Message\\' => 
+        'PHPMailer\\PHPMailer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Intervention\\Image\\' => 
+        'Model\\' => 
         array (
-            0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
+            0 => __DIR__ . '/../..' . '/models',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'MVC\\' => 
         array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+            0 => __DIR__ . '/../..' . '/',
         ),
-        'App\\' => 
+        'Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/controllers',
+        ),
+        'Classes\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),
