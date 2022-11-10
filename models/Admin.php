@@ -1,8 +1,9 @@
 <?php
 
-namespace App;
+namespace Model;
 
 class Admin extends ActiveRecord {
+   
     // Base DE DATOS
     protected static $tabla = 'usuarios';
     protected static $columnasDB = ['id', 'email', 'password'];
@@ -30,47 +31,37 @@ class Admin extends ActiveRecord {
 
     public function existeUsuario() {
         // Revisar si el usuario existe.
-        $query = "SELECT * FROM usuarios WHERE email = '" . $this->email . "' LIMIT 1";
+        $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
         $resultado = self::$db->query($query);
 
-        if($resultado->num_rows) {
-            return [
-                true,
-                $resultado
-            ];
-        } else {
+        if(!$resultado->num_rows) {
             self::$errores[] = 'El Usuario No Existe';
-            return [
-                false,
-                self::$errores
-            ];
-        } 
-    }
-
-    public function verificarPassword($resultado) {
-
-        $usuario = $resultado->fetch_assoc();
-        $auth = password_verify($this->password, $usuario['password']);
-
-
-        if($auth) {
-
-            // El usuario esta autenticado
-            session_start();
-
-            // Llenar el arreglo de la sesión
-            $_SESSION['usuario'] = $usuario['email'];
-            $_SESSION['login'] = true;
-            return true;
-        } else {
-            self::$errores[] = 'Password Incorrecto';
-            return [
-                false,
-                self::$errores
-            ];
+            return;
         }
 
+        return $resultado;
+    }
 
+    public function comprobarPassword($resultado) {
+        $usuario = $resultado->fetch_object();
+
+        $this->autenticado = password_verify( $this->password, $usuario->password );
+
+        if(!$this->autenticado) {
+            self::$errores[] = 'El Password es Incorrecto';
+            return;
+        } 384
+    }
+
+    public function autenticar() {
+         // El usuario esta autenticado
+        session_start();
+
+         // Llenar el arreglo de la sesión
+        $_SESSION['usuario'] = $this->email;
+        $_SESSION['login'] = true;
+
+        header('Location: /admin');
     }
 
 }
