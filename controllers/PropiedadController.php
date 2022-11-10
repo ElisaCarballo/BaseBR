@@ -59,18 +59,14 @@ class PropiedadController  {
                 $image->save(CARPETA_IMAGENES . $nombreImagen);
 
                 // Guarda en la base de datos
-                $resultado = $propiedad->guardar();
-
-                if($resultado) {
-                    header('location: /propiedades');
-                }
+                $propiedad->guardar();
             }
         }
 
         $router->render('propiedades/crear', [
-            'errores' => $errores,
             'propiedad' => $propiedad,
-            'vendedores' => $vendedores
+            'vendedores' => $vendedores,
+            'errores' => $errores
         ]);
     }
 
