@@ -6,7 +6,8 @@ use Model\Propiedad;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class PaginasController {
-    public static function index( Router $router ) {
+    public static function index( ) {
+        echo "desde Index";
 
         $propiedades = Propiedad::get(3);
 
@@ -16,23 +17,22 @@ class PaginasController {
         ]);
     }
 
-    public static function nosotros( Router $router ) {
-        $router->render('paginas/nosotros', [
+    public static function nosotros(  ) {
+        echo "desde nosotros", [
 
         ]);
     }
 
-    public static function propiedades( Router $router ) {
-
-        $propiedades = Propiedad::all();
+    public static function propiedades( ) {
+        echo "desde propiedades";
 
         $router->render('paginas/propiedades', [
             'propiedades' => $propiedades
         ]);
     }
 
-    public static function propiedad(Router $router) {
-        $id = validarORedireccionar('/propiedades');
+    public static function propiedad() {
+        echo "desde propiedad";
 
         // Obtener los datos de la propiedad
         $propiedad = Propiedad::find($id);
@@ -42,17 +42,19 @@ class PaginasController {
         ]);
     }
 
-    public static function blog( Router $router ) {
-
+    public static function blog( ) {
+        echo "desde blog";
         $router->render('paginas/blog');
     }
 
-    public static function entrada( Router $router ) {
+    public static function entrada( ) {
+        echo "desde Entrada";
         $router->render('paginas/entrada');
     }
 
 
-    public static function contacto( Router $router ) {
+    public static function contacto( ) {
+        echo "desde entrada";
         $mensaje = null;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
