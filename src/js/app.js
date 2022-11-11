@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     eventListeners();
+
     darkMode();
 });
 
@@ -32,38 +33,54 @@ function darkMode() {
 
 function eventListeners() {
     const mobileMenu = document.querySelector('.mobile-menu');
+
     mobileMenu.addEventListener('click', navegacionResponsive);
 
+
+    /***********************************************************************************/
+    // Muestra campos del formulario de forma condicional
     const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"]');
-    metodoContacto.forEach(input => input.addEventListener('click', seleccionarMetodo));
+    // Itera en el select del formulario y pone un eventlistener a cada uno
+    metodoContacto.forEach(input => input.addEventListener('click', mostrarMetodoContacto));
+
+    /************************************************************************************/
+
+
+
+    // Eliminar texto de confirmación de CRUD en admin/index.php
+    setTimeout(function(){        
+        const mensajeConfirm = document.querySelector('.alerta.exito');
+        if(mensajeConfirm) {
+        const padre = mensajeConfirm.parentElement;
+        padre.removeChild(mensajeConfirm);}
+    }, 3000);
 }
 
-function navegacionResponsive() {
-    const navegacion = document.querySelector('.navegacion');
-
-    navegacion.classList.toggle('mostrar')
-}
-
-function seleccionarMetodo(e) {
+function mostrarMetodoContacto(e){
     const contactoDiv = document.querySelector('#contacto');
-
-
-    if(e.target.value === 'telefono') {
+    if (e.target.value === 'telefono') {
         contactoDiv.innerHTML = `
-            <label for="telefono">Teléfono</label>
-            <input type="tel" placeholder="Tu Teléfono" id="telefono"  name="contacto[telefono]" required>
+                <label for="telefono">Numero de Teléfono</label>
+                <input type="tel" placeholder="Tu Teléfono" id="telefono" name="contacto[telefono]"> 
 
-            <label for="fecha">Fecha Llamada:</label>
-            <input type="date" id="fecha"  name="contacto[fecha]" required>
+                <p>Elija la fecha y la hora para llamada</p>
 
-            <label for="hora">Hora Llamada:</label>
-            <input type="time" id="hora" min="09:00" max="18:00"  name="contacto[hora]" required>
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="contacto[fecha]">
 
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" min="09:00" max="18:00" name="contacto[hora]">
         `;
     } else {
         contactoDiv.innerHTML = `
-            <label for="email">E-mail</label>
-            <input type="email" placeholder="Tu Email" id="email" name="contacto[email]" required>
+                <label for="email">E-mail</label>
+                <input type="email" placeholder="Tu Email" id="email" name="contacto[email]" required>
         `;
     }
+}
+
+function navegacionResponsive(e) {
+    const navegacion = document.querySelector('.navegacion');
+
+    navegacion.classList.toggle('mostrar')
 }
