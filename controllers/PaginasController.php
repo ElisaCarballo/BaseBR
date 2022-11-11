@@ -5,35 +5,34 @@ use MVC\Router;
 use Model\Propiedad;
 use PHPMailer\PHPMailer\PHPMailer;
 
+
 class PaginasController {
-    public static function index( ) {
-        echo "desde Index";
+    public static function index(Router $router ) {
 
         $propiedades = Propiedad::get(3);
+        $inicio = true;
 
         $router->render('paginas/index', [
-            'inicio' => true,
+            'inicio' => $inicio,
             'propiedades' => $propiedades
         ]);
     }
 
-    public static function nosotros(  ) {
-        echo "desde nosotros", [
-
-        ]);
+    public static function nosotros( Router $router ) {
+        
+        $router->render('paginas/nosotros')
     }
 
-    public static function propiedades( ) {
-        echo "desde propiedades";
+    public static function propiedades(Router $router ) {
+
+        $propiedades = Propiedad::all()
 
         $router->render('paginas/propiedades', [
             'propiedades' => $propiedades
         ]);
     }
 
-    public static function propiedad() {
-        echo "desde propiedad";
-
+    public static function propiedad(Router $router) {
         // Obtener los datos de la propiedad
         $propiedad = Propiedad::find($id);
 
@@ -42,18 +41,18 @@ class PaginasController {
         ]);
     }
 
-    public static function blog( ) {
+    public static function blog(Router $router ) {
         echo "desde blog";
         $router->render('paginas/blog');
     }
 
-    public static function entrada( ) {
+    public static function entrada(Router $router ) {
         echo "desde Entrada";
         $router->render('paginas/entrada');
     }
 
 
-    public static function contacto( ) {
+    public static function contacto(Router $router ) {
         echo "desde entrada";
         $mensaje = null;
 
