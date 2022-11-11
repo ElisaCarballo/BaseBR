@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Controllers;
 
@@ -6,82 +6,66 @@ use MVC\Router;
 use Model\Vendedor;
 
 class VendedorController {
-
-    public static function crear(Router $router) {
-        $errores = Vendedor::getErrores();
+    public static function crear(Router $router){
         $vendedor = new Vendedor;
 
-        // Ejecutar el código después de que el usuario envia el formulario
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Arreglo con mensajes de errores
+        $errores = Vendedor::getErrores();
 
-            /** Crea una nueva instancia */
-            $vendedor = new Vendedor($_POST['vendedor']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Crea una nueva instancia.
+            $vendedor =new Vendedor($_POST['vendedor']);
 
-            // Validar
             $errores = $vendedor->validar();
-
-
-            if(empty($errores)) {
+            
+            if (empty($errores)) {
                 $vendedor->guardar();
-
-        $router->render('vendedores/crear', [
+            }
+        }
+        $router->render('vendedores/crear',[
             'errores' => $errores,
             'vendedor' => $vendedor
-        ]);
+    ]);
     }
 
-    public static function actualizar(Router $router) {
-        
-        $errores = Vendedor::getErrores();
+    
+    public static function actualizar(Router $router){
         $id = validarORedireccionar('/admin');
-
         $vendedor = Vendedor::find($id);
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Arreglo con mensajes de errores
+        $errores = Vendedor::getErrores();
 
-                // Asignar los atributos
-                $args = $_POST['vendedor'];
-                $vendedor->sincronizar($args);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Asignar los atributos
+            $args = $_POST['vendedor'];
+            $vendedor->sincronizar($args);
 
-                // Validación
-                $errores = $vendedor->validar();
-                
-                if(empty($errores)) {
+            // Validacion
+            $errores = $vendedor->validar();
 
-                    // Guarda en la base de datos
-                    $resultado = $vendedor->guardar();
-
-                    if($resultado) {
-                        header('location: /admin');
-                    }
-                }
+            if (empty($errores)) {
+                $vendedor->guardar();
+            }
         }
-
-        $router->render('vendedores/actualizar', [
+        $router->render('vendedores/actualizar',[
             'vendedor' => $vendedor,
             'errores' => $errores
         ]);
     }
 
-    public static function eliminar( ) {
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
-                $id = $_POST['id'];
-                $id = filter_var($id, FILTER_VALIDATE_INT);
+    public static function eliminar(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // debuguear($_POST['tipo']);
+            $id = $_POST['id'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+            if ($id) {
+                $tipo = $_POST['tipo'];
     
-                // encontrar y eliminar la propiedad
-                $propiedad = Propiedad::find($id);
-                $propiedad->eliminar();
-
-                // Redireccionar
-                if($id) {
-                    $tipo = $_POST['tipo'];
-                    if(validarTipoContenido);{
-                        $vendedor = Vendedor::find($id);
-                        $vendedor->eliminar();
-
-                    }
+                if (validarTipoContenido($tipo)) {
+                    $vendedor = Vendedor::find($id);
+                    $vendedor->eliminar();
                 }
             }
         }
